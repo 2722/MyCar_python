@@ -1,7 +1,7 @@
 # MyCar_python
 
-自动抓取Tumblr指定用户视频分享
-注：此脚本由python2.7编写
+  自动抓取Tumblr指定用户视频分享
+  注：此脚本由python2.7编写
 
 ##直至7/30功能：
 1. 防止重复下载
@@ -9,4 +9,5 @@
 * 支持自定义用户名(直接修改users，默认的很羞羞(*ﾉωﾉ))
 
 ##运行方法：
-要把geturl.py和users放到同目录下才行，直接执行geturl.py就可以了(*ﾉωﾉ)
+ * 要把geturl.py和users放到同目录下才行
+ * 直接执行geturl.py就可以了(*ﾉωﾉ)
