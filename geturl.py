@@ -86,7 +86,6 @@ for i in users:
 	th = threading.Thread(target=getpage, args=[i])
 	th.start()
 	ts.append(th)
-
 for i in ts:
 	i.join()
 
