@@ -86,6 +86,7 @@ for i in users:
 	th = threading.Thread(target=getpage, args=[i])
 	th.start()
 	ts.append(th)
+
 for i in ts:
 	i.join()
 
@@ -104,12 +105,21 @@ if len(newusers) != 0:
 
 # 合并URL
 newurl = '\n'.join(newurl)
-newurl='Now URL Is Here:\n\n%s' % newurl
+newurl='Now URL Is Here:\n\n%s\n' % newurl
 
 # 获取时间
 nowtime = time.strftime("%m%d%H_%M_%S_%Y", time.localtime())
 
 #写新纪录文件
-f=open('%s/%s' % (sys.path[0],nowtime), 'w')
+hispath="%s/HistoryCar"%sys.path[0]
+if os.path.isdir(hispath)==False:
+	os.mkdir(hispath)
+f=open('%s/%s' % (hispath,nowtime), 'w')
 f.write(newurl)
 f.close()
+
+#write newurl
+f=open("%s/newurl"%sys.path[0],"w")
+f.write(newurl)
+f.close()
+
