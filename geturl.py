@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 # coding=utf-8
 import sys
 import re
@@ -16,7 +16,7 @@ newusers = set([])
 def getpage(url):
 	# 下载主页，把主页读取到text
 	text = urllib.urlopen(url)
-	text = text.read(20 * 1024 * 1024)
+	text = text.read()
 	text = text.split('\n')
 
     # 寻找框架，并把真正的url放入iframes中
@@ -36,13 +36,14 @@ def getpage(url):
     # 寻找真正下载地址
 	for l in iframes:
 		text = urllib.urlopen(l)
-		text = text.read(20 * 1024 * 1024)
+		text = text.read()
 		text = text.split('\n')
 		for i in text:
 			real = re.match('.*<source src=\"(.*)\" type=', i)
 			if real != None:
 				real = real.group(1)
 				oldnum = len(oldurl)  # 去重
+				real=re.sub("/480$","",real)  #高清化
 				oldurl.add(real)
 				if len(oldurl) != oldnum:
 					newurl.add(real)
@@ -51,12 +52,12 @@ def getpage(url):
 #					print "已存在"
 					pass
 				break
-				
+
 
 
 # 打开用户名列表
 f = open('%s/users' % sys.path[0], 'r')
-users = f.read(20 * 1024 * 1024)
+users = f.read()
 f.close()
 # 分割和处理并集合化
 users = users.split('\n')
@@ -75,7 +76,7 @@ if os.path.isfile('%s/myurl.dat' % sys.path[0]) == False:
 	os.mknod('%s/myurl.dat' % sys.path[0])
 
 f = open('%s/myurl.dat' % sys.path[0], 'r')
-oldurl = f.read(20 * 1024 * 1024)
+oldurl = f.read()
 f.close()
 # 分割并集合化
 oldurl = set(oldurl.split('\n'))
@@ -122,4 +123,3 @@ f.close()
 f=open("%s/newurl"%sys.path[0],"w")
 f.write(newurl)
 f.close()
-
