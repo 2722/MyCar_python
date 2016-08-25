@@ -64,7 +64,8 @@ users = users.split('\n')
 
 #去除 ''
 users=list(set(users))
-users.remove('')
+if "" in users:
+    users.remove('')
 
 for i in range(0, len(users)):
 	users[i] = 'http://%s.tumblr.com' % users[i]
