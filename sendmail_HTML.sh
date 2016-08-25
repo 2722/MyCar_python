@@ -14,3 +14,4 @@ do
 done
 
 sendmail -t < mailbody
+rm -f mailbody
