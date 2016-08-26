@@ -16,7 +16,7 @@ newusers = set([])
 def getpage(url):
 	# 下载主页，把主页读取到text
 	text = urllib.request.urlopen(url)
-	text = text.read()
+	text = text.read().decode('utf-8')
 	text = text.split('\n')
 
     # 寻找框架，并把真正的url放入iframes中
@@ -36,7 +36,7 @@ def getpage(url):
     # 寻找真正下载地址
 	for l in iframes:
 		text = urllib.request.urlopen(l)
-		text = text.read()
+		text = text.read().decode('utf-8')
 		text = text.split('\n')
 		for i in text:
 			real = re.match('.*<source src=\"(.*)\" type=', i)
