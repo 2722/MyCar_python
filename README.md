@@ -28,6 +28,8 @@
 ##运行方法：
  1. 要把`geturl.py`和`users`放到同目录下才行
  * 使用`python2.7`解释器直接执行`geturl.py`就可以了(*ﾉωﾉ)
+ * 执行完毕之后，可以自行选择发送`HTML的shell脚本`和`只发送url的shell脚本`
+ * 可以的话推荐使用Linux的crontab定时发送
 
 ##注意事项：
  * 因为tumblr被墙，所以请在国外服务器上跑此脚本
