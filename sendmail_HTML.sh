@@ -14,5 +14,5 @@ do
     echo -e '<p ><video style="width:540px;height:304px" controls><source src="'$oneline'" type="video/mp4"><a href="'$oneline'">'$oneline'</a></video></p>\n' >> mailbody
 done
 
-/usr/sbin/sendmail -t < mailbody
+sendmail -t < mailbody
 rm -f mailbody
