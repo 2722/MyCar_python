@@ -3,16 +3,22 @@
 
 export PATH=/usr/sbin:/usr/bin:$PATH
 obj=`date +"%m%d"`"mycar"
+users=(
+"你的邮箱1"
+"你的邮箱2"
+"你的邮箱3"
+)
 
-echo 'From: pycar' > mailbody
-echo 'To: [!YOURNAME] <[!YOURMAILADDRESS]>' >> mailbody
-# echo 'Cc: someone <someone@example.com>, TooYoung <toosimple@naive.com>' >> mailbody
-echo -e 'Subject: '$obj'\nContent-Type: text/html\n' >> mailbody
-
-cat /root/pycar/newurl | grep -v ^$|sed '/Now URL/d'| while read oneline
+for mails in ${users[@]}
 do
-    echo -e '<p ><video style="width:540px;height:304px" controls><source src="'$oneline'" type="video/mp4"><a href="'$oneline'">'$oneline'</a></video></p>\n' >> mailbody
-done
+	echo 'From: pycar' > mailbody
+	echo "Bcc:<${mails}>">> mailbody
+	echo -e 'Subject: '$obj'\nContent-Type: text/html\n' >> mailbody
+	cat /root/pycar/newurl | grep -v ^$|sed '/Now URL/d'| while read oneline
+	do
+		echo -e '<p ><video style="width:540px;height:304px" controls><source src="'$oneline'" type="video/mp4"><a href="'$oneline'">'$oneline'</a></video></p>\n' >> mailbody
+	done
 
-sendmail -t < mailbody
-rm -f mailbody
+	/usr/sbin/sendmail -t < mailbody
+	rm -f mailbody
+done
